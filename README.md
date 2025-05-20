@@ -9,7 +9,7 @@
 - Analyzes firewall settings and open ports  
 - Scans startup programs for suspicious entries  
 - Generates detailed, categorized security reports  
-- Help you keep the audit of your system
+- Helps you maintain a regular audit of your system’s security posture
 
 ## Tech Stack
 
