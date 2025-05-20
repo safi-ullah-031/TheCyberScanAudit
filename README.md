@@ -85,7 +85,3 @@ Feel free to open a pull request or issue.
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
----
-
-*Built by Safi *
----
