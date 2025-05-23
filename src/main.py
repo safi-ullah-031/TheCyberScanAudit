@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from platform_detection import detect_platform
 from scanner_controller import ScannerController
 from report_generator import ReportGenerator

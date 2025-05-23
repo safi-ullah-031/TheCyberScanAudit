@@ -1,7 +1,9 @@
 # src/platform_detection.py
 
-import platform
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import platform
 
 def detect_platform():
     system = platform.system().lower()

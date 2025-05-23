@@ -1,5 +1,5 @@
 import sys
-from src.scanners.utils import run_command
+from utils import run_command
 
 class FirewallChecker:
     def scan(self, platform):

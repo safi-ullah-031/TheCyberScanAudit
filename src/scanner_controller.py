@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from scanners.firewall_checker import FirewallChecker
 from scanners.password_checker import PasswordChecker
 from scanners.patch_checker import PatchChecker
