@@ -1,10 +1,17 @@
+import sys
+from utils import run_command
+
 class PasswordChecker:
     def scan(self, platform):
-        # Placeholder: Real implementation would check for weak/default passwords
         if platform == "windows":
-            result = "Checked local accounts for weak/default passwords (placeholder)."
+            cmd = (
+                "powershell -Command \""
+                "Get-LocalUser | Where-Object { $_.PasswordRequired -eq $false } | Select-Object Name,Enabled\""
+            )
         elif platform == "linux":
-            result = "Checked /etc/shadow for weak/default passwords (placeholder)."
+            cmd = "awk -F: '($2=="" || $2=="*" || $2=="!") {print $1}' /etc/shadow"
         else:
-            result = "Unsupported platform."
-        return {"passwords": {"result": result}}
+            return {"passwords": {"status": "unsupported platform", "error": None, "details": None, "returncode": 1}}
+        out, err, code = run_command(cmd)
+        details = out.strip().splitlines() if out else []
+        return {"passwords": {"output": out, "error": err, "returncode": code, "details": details}}

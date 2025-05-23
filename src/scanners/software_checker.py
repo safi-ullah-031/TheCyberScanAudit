@@ -1,10 +1,16 @@
+import sys
+from utils import run_command
+
 class SoftwareChecker:
     def scan(self, platform):
-        # Placeholder: Real implementation would check for outdated software
         if platform == "windows":
-            result = "Checked installed software for outdated versions (placeholder)."
+            cmd = (
+                "powershell -Command \"Get-WmiObject -Class Win32_Product | Select-Object Name, Version\""
+            )
         elif platform == "linux":
-            result = "Checked installed packages for outdated versions (placeholder)."
+            cmd = "dpkg -l | grep '^ii'"
         else:
-            result = "Unsupported platform."
-        return {"software": {"result": result}}
+            return {"software": {"status": "unsupported platform", "error": None, "details": None, "returncode": 1}}
+        out, err, code = run_command(cmd)
+        details = out.strip().splitlines() if out else []
+        return {"software": {"output": out, "error": err, "returncode": code, "details": details}}

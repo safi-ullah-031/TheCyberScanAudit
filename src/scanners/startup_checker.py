@@ -1,10 +1,16 @@
+import sys
+from utils import run_command
+
 class StartupChecker:
     def scan(self, platform):
-        # Placeholder: Real implementation would check for suspicious startup entries
         if platform == "windows":
-            result = "Checked Windows startup entries for suspicious programs (placeholder)."
+            cmd = (
+                "powershell -Command \"Get-CimInstance -ClassName Win32_StartupCommand | Select-Object Name, Command, Location\""
+            )
         elif platform == "linux":
-            result = "Checked Linux startup entries for suspicious programs (placeholder)."
+            cmd = "ls /etc/xdg/autostart /etc/init.d ~/.config/autostart 2>/dev/null"
         else:
-            result = "Unsupported platform."
-        return {"startup": {"result": result}}
+            return {"startup": {"status": "unsupported platform", "error": None, "details": None, "returncode": 1}}
+        out, err, code = run_command(cmd)
+        details = out.strip().splitlines() if out else []
+        return {"startup": {"output": out, "error": err, "returncode": code, "details": details}}
