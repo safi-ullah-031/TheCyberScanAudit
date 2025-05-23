@@ -1,5 +1,3 @@
-# src/main.py
-
 from platform_detection import detect_platform
 from scanner_controller import ScannerController
 from report_generator import ReportGenerator
@@ -15,7 +13,6 @@ def main():
     
     # Run all scans and collect findings
     findings = controller.run_all_scans()
-    
     # Generate and save the report
     reporter = ReportGenerator()
     reporter.generate_report(findings)
