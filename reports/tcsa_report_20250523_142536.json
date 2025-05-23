@@ -1,0 +1,24 @@
+{
+    "firewall": {
+        "output": "",
+        "error": "'Select-Object' is not recognized as an internal or external command,\noperable program or batch file.",
+        "returncode": 255
+    },
+    "passwords": {
+        "result": "Checked local accounts for weak/default passwords (placeholder)."
+    },
+    "patches": {
+        "result": "Checked for missing Windows Updates (placeholder)."
+    },
+    "software": {
+        "result": "Checked installed software for outdated versions (placeholder)."
+    },
+    "startup": {
+        "result": "Checked Windows startup entries for suspicious programs (placeholder)."
+    },
+    "open_ports": {
+        "output": "TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       1528\n  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4\n  TCP    0.0.0.0:2179           0.0.0.0:0              LISTENING       3612\n  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1796\n  TCP    0.0.0.0:5040           0.0.0.0:0              LISTENING       10068\n  TCP    0.0.0.0:5357           0.0.0.0:0              LISTENING       4\n  TCP    0.0.0.0:49664          0.0.0.0:0              LISTENING       1216\n  TCP    0.0.0.0:49665          0.0.0.0:0              LISTENING       1044\n  TCP    0.0.0.0:49668          0.0.0.0:0              LISTENING       3340\n  TCP    0.0.0.0:49669          0.0.0.0:0              LISTENING       3824\n  TCP    0.0.0.0:49670          0.0.0.0:0              LISTENING       3240\n  TCP    0.0.0.0:49673          0.0.0.0:0              LISTENING       5236\n  TCP    0.0.0.0:49692          0.0.0.0:0              LISTENING       1188\n  TCP    127.0.0.1:61885        0.0.0.0:0              LISTENING       11364\n  TCP    172.21.32.1:139        0.0.0.0:0              LISTENING       4\n  TCP    172.30.240.1:139       0.0.0.0:0              LISTENING       4\n  TCP    192.168.1.9:139        0.0.0.0:0              LISTENING       4\n  TCP    [::]:135               [::]:0                 LISTENING       1528\n  TCP    [::]:445               [::]:0                 LISTENING       4\n  TCP    [::]:2179              [::]:0                 LISTENING       3612\n  TCP    [::]:3389              [::]:0                 LISTENING       1796\n  TCP    [::]:5357              [::]:0                 LISTENING       4\n  TCP    [::]:49664             [::]:0                 LISTENING       1216\n  TCP    [::]:49665             [::]:0                 LISTENING       1044\n  TCP    [::]:49668             [::]:0                 LISTENING       3340\n  TCP    [::]:49669             [::]:0                 LISTENING       3824\n  TCP    [::]:49670             [::]:0                 LISTENING       3240\n  TCP    [::]:49673             [::]:0                 LISTENING       5236\n  TCP    [::]:49692             [::]:0                 LISTENING       1188\n  TCP    [::1]:42050            [::]:0                 LISTENING       21380\n  TCP    [::1]:49674            [::]:0                 LISTENING       5696",
+        "error": "",
+        "returncode": 0
+    }
+}
