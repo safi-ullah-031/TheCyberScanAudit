@@ -1,12 +1,17 @@
 import os
 import glob
 import json
+import logging
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_latest_report(report_dir="reports"):
     files = glob.glob(os.path.join(report_dir, "tcsa_report_*.json"))
     if not files:
+        logging.error("No reports found.")
         raise FileNotFoundError("No reports found.")
     latest = max(files, key=os.path.getctime)
     with open(latest, "r") as f:
@@ -16,6 +21,7 @@ def get_latest_report(report_dir="reports"):
 def analyze_report_with_agent(report_data):
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
+        logging.error("OPENAI_API_KEY environment variable not set.")
         raise EnvironmentError("OPENAI_API_KEY environment variable not set.")
     llm = ChatOpenAI(model="gpt-3.5-turbo", openai_api_key=api_key)
     prompt = (
