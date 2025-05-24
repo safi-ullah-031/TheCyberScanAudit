@@ -7,6 +7,7 @@ from scanners.patch_checker import PatchChecker
 from scanners.software_checker import SoftwareChecker
 from scanners.startup_checker import StartupChecker
 from scanners.open_ports_checker import OpenPortsChecker
+from scanners.disk_encryption_checker import DiskEncryptionChecker
 
 class ScannerController:
     def __init__(self, platform):
@@ -18,6 +19,7 @@ class ScannerController:
             SoftwareChecker(),
             StartupChecker(),
             OpenPortsChecker(),
+            DiskEncryptionChecker(),
         ]
 
     def run_all_scans(self):
