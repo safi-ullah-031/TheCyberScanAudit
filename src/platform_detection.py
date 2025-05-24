@@ -4,6 +4,7 @@ import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import platform
+import logging
 
 def detect_platform():
     system = platform.system().lower()
@@ -14,7 +15,7 @@ def detect_platform():
     elif system == "darwin":
         return "mac"
     else:
-        print(f"Unsupported platform: {system}")
+        logging.error(f"Unsupported platform: {system}")
         sys.exit(1)
 
 if __name__ == "__main__":
