@@ -9,7 +9,7 @@
 - Analyzes firewall settings and open ports  
 - Scans startup programs for suspicious entries  
 - Generates detailed, categorized security reports  
-- Helps you maintain a regular audit of your system’s security posture
+- Helps you maintain a regular audit of your system's security posture
 
 ## Tech Stack
 
@@ -76,10 +76,29 @@ TheCyberScanAudit/
 └── tests/
 ```
 
+## New Feature: Disk Encryption Check
+
+- Checks if system drives are encrypted (BitLocker for Windows, LUKS for Linux)
+- Results are included in the security report with risk ratings
+
+## AI Agent Analysis
+
+- The project includes an AI agent (src/ai_agent.py) that summarizes and prioritizes findings from the latest report using OpenAI's GPT models.
+- To use this feature, create a `.env` file in the project root with your OpenAI API key:
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
 ## Contributing
 
-Contributions, issues, and feature requests are welcome!
-Feel free to open a pull request or issue.
+- Please ensure all code is linted and tested before submitting a pull request.
+- Add or update tests in the `tests/` directory as needed.
+- Use clear commit messages and document new features in the README.
+
+## Running Tests
+
+- (Add your test instructions here, e.g., pytest or unittest)
 
 ## License
 
