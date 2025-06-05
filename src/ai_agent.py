@@ -2,11 +2,15 @@ import os
 import glob
 import json
 import logging
+from dotenv import load_dotenv
+load_dotenv()
+
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage
-from dotenv import load_dotenv
-
-load_dotenv()
+try:
+    import google.generativeai as genai
+except ImportError:
+    genai = None
 
 def get_latest_report(report_dir="reports"):
     files = glob.glob(os.path.join(report_dir, "tcsa_report_*.json"))
@@ -23,23 +27,34 @@ def get_latest_report(report_dir="reports"):
         return None, None
 
 def analyze_report_with_agent(report_data):
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        logging.error("OPENAI_API_KEY environment variable not set.")
-        return "[ERROR] AI analysis unavailable: API key not set."
-    try:
-        llm = ChatOpenAI(model="gpt-3.5-turbo", openai_api_key=api_key)
-        prompt = (
-            "You are a cybersecurity expert AI agent. "
-            "Given the following system scan report in JSON, provide a human-readable summary, "
-            "highlighting the most critical risks, and suggest prioritized remediation steps. "
-            "Be concise and actionable.\n\nReport:\n" + json.dumps(report_data, indent=2)
-        )
-        response = llm([HumanMessage(content=prompt)])
-        return response.content
-    except Exception as e:
-        logging.error(f"AI agent failed: {e}")
-        return f"[ERROR] AI agent failed: {e}"
+    gemini_api_key = os.getenv("GEMINI_API_KEY")
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    prompt = (
+        "You are a cybersecurity expert AI agent. "
+        "Given the following system scan report in JSON, provide a human-readable summary, "
+        "highlighting the most critical risks, and suggest prioritized remediation steps. "
+        "Be concise and actionable.\n\nReport:\n" + json.dumps(report_data, indent=2)
+    )
+    if gemini_api_key and genai:
+        try:
+            genai.configure(api_key=gemini_api_key)
+            model = genai.GenerativeModel('models/gemma-3-1b-it')
+            response = model.generate_content(prompt)
+            return response.text if hasattr(response, 'text') else str(response)
+        except Exception as e:
+            logging.error(f"Gemini agent failed: {e}")
+            return f"[ERROR] Gemini agent failed: {e}"
+    elif openai_api_key:
+        try:
+            llm = ChatOpenAI(model="gpt-3.5-turbo", openai_api_key=openai_api_key)
+            response = llm([HumanMessage(content=prompt)])
+            return response.content
+        except Exception as e:
+            logging.error(f"OpenAI agent failed: {e}")
+            return f"[ERROR] OpenAI agent failed: {e}"
+    else:
+        logging.error("No API key set for either Gemini or OpenAI.")
+        return "[ERROR] No API key set for either Gemini or OpenAI."
 
 def main():
     print("[*] Loading latest scan report...")
