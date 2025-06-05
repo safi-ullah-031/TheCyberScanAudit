@@ -3,4 +3,5 @@ openai
 python-dotenv
 logging
 gradio
-langchain_community 
+langchain_community
+google-generativeai 
